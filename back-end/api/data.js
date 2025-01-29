@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const authMiddleware = require("../data/authMiddleware");
 
 const router = express.Router();
 
@@ -15,13 +16,13 @@ const writeData = (data) =>
 // --- CRUD Operations ---
 
 // GET all currencies and their exchange rates
-router.get("/", (req, res) => {
+router.get("/", authMiddleware, (req, res) => {
   const data = readData();
   res.json(data);
 });
 
 // POST add or update a currency and its rates
-router.post("/", (req, res) => {
+router.post("/", authMiddleware, (req, res) => {
   const { baseCurrency, rates } = req.body;
 
   if (!baseCurrency || !rates) {
@@ -40,7 +41,7 @@ router.post("/", (req, res) => {
 });
 
 // PUT update a specific exchange rate
-router.put("/:baseCurrency/:targetCurrency", (req, res) => {
+router.put("/:baseCurrency/:targetCurrency", authMiddleware, (req, res) => {
   const { baseCurrency, targetCurrency } = req.params;
   const { rate } = req.body;
 
@@ -64,7 +65,7 @@ router.put("/:baseCurrency/:targetCurrency", (req, res) => {
 });
 
 // DELETE a specific exchange rate
-router.delete("/:baseCurrency/:targetCurrency", (req, res) => {
+router.delete("/:baseCurrency/:targetCurrency", authMiddleware, (req, res) => {
   const { baseCurrency, targetCurrency } = req.params;
 
   const data = readData();

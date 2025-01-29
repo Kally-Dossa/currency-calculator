@@ -24,12 +24,11 @@ const LoginForm = ({ onLogin }) => {
       const data = await response.json();
 
       if (response.ok) {
-        onLogin(username); // Ενημέρωση κατάστασης login
-        navigate("/business"); // Μεταφορά στο CRUDInterface
+        localStorage.setItem("authToken", data.token); // Store token
+        onLogin(username); // Update login state
+        navigate("/admin"); // Redirect
       } else {
-        setError(
-          "⚠️ Incorrect credentials! Please check your username and password and try again."
-        );
+        setError("⚠️ Incorrect credentials! Please try again.");
       }
     } catch (error) {
       setError("Server error. Please try again later.");

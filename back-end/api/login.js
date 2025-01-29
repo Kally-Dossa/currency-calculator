@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const router = express.Router();
 
@@ -16,13 +17,19 @@ const loadUsers = () => {
   return JSON.parse(data);
 };
 
+// Function to generate a Base64 token
+const generateBase64Token = (username) => {
+  const tokenData = `${username}:${crypto.randomBytes(16).toString("hex")}`;
+  return Buffer.from(tokenData).toString("base64");
+};
+
 // Login endpoint
 router.post("/", (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
     return res
-      .status(400)
+      .status(403)
       .json({ message: "Username and password are required" });
   }
 
@@ -33,11 +40,15 @@ router.post("/", (req, res) => {
     );
 
     if (user) {
-      res
-        .status(200)
-        .json({ message: "Login successful", username: user.username });
+      const token = generateBase64Token(username);
+      console.log(`Generated Token for ${username}: ${token}`);
+      res.status(200).json({
+        message: "Login successful",
+        username: user.username,
+        token, // Send the token to the UI
+      });
     } else {
-      res.status(401).json({ message: "Invalid username or password" });
+      res.status(403).json({ message: "Invalid username or password" });
     }
   } catch (error) {
     console.error("Error:", error.message);
