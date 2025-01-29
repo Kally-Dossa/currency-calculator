@@ -56,9 +56,7 @@ const CurrencyConverter = () => {
   const handleModeChange = (newMode) => {
     setMode(newMode);
     if (newMode === "Business") {
-      navigate("/business"); // Πλοήγηση στη σελίδα Business
-    } else {
-      navigate("/personal"); // Πλοήγηση στη σελίδα Personal (προαιρετικά)
+      navigate("/login"); // Μεταφορά στο Login
     }
   };
 
@@ -108,7 +106,7 @@ const CurrencyConverter = () => {
               >
                 {currencies.map((currency) => (
                   <option key={currency} value={currency}>
-                    {currency} {currencySymbols[currency] || ""}
+                    {currency}
                   </option>
                 ))}
               </select>
@@ -134,7 +132,7 @@ const CurrencyConverter = () => {
               >
                 {currencies.map((currency) => (
                   <option key={currency} value={currency}>
-                    {currency} {currencySymbols[currency] || ""}
+                    {currency}
                   </option>
                 ))}
               </select>
@@ -154,8 +152,7 @@ const CurrencyConverter = () => {
         {convertedAmount !== null && (
           <div className="text-center mt-4">
             <h4>
-              Converted Amount: {currencySymbols[targetCurrency] || ""}{" "}
-              {convertedAmount} {targetCurrency}
+              Converted Amount: {convertedAmount} {targetCurrency}
             </h4>
           </div>
         )}

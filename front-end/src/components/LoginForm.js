@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Χρήση του useNavigate
 import "./../Css/LoginForm.css";
 
 const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // Αρχικοποίηση του navigate
 
   const handleSubmit = async (e) => {
-    //clear error message
     e.preventDefault();
     setError("");
 
@@ -23,7 +24,8 @@ const LoginForm = ({ onLogin }) => {
       const data = await response.json();
 
       if (response.ok) {
-        onLogin(username);
+        onLogin(username); // Ενημέρωση κατάστασης login
+        navigate("/business"); // Μεταφορά στο CRUDInterface
       } else {
         setError(
           "⚠️ Incorrect credentials! Please check your username and password and try again."

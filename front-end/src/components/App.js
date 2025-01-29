@@ -4,7 +4,6 @@ import {
   Routes,
   Route,
   Navigate,
-  useNavigate,
 } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import CurrencyConverter from "./CurrencyConverter";
@@ -24,28 +23,19 @@ const App = () => {
   return (
     <Router>
       <div className="app-container">
-        {!isLoggedIn ? (
-          <LoginForm onLogin={handleLogin} />
-        ) : (
-          <Routes>
-            {/* Προεπιλεγμένη διαδρομή μετά το login */}
-            <Route
-              path="/"
-              element={
-                <div>
-                  <h1 className="text-center mt-4 main-title">
-                    Welcome, {username}
-                  </h1>
-                  <CurrencyConverter />
-                </div>
-              }
-            />
-            {/* Διαδρομή για την επιλογή "Business" */}
-            <Route path="/business" element={<CRUDInterface />} />
-            {/* Αν δεν υπάρχει αντιστοιχία, επιστροφή στο "/" */}
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        )}
+        <Routes>
+          {/* Αρχική διαδρομή: CurrencyConverter */}
+          <Route path="/" element={<CurrencyConverter />} />
+          {/* Διαδρομή για Login */}
+          <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
+          {/* Διαδρομή για CRUDInterface */}
+          <Route
+            path="/business"
+            element={isLoggedIn ? <CRUDInterface /> : <Navigate to="/login" />}
+          />
+          {/* Αν δεν υπάρχει αντιστοιχία, επιστροφή στο "/" */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </div>
     </Router>
   );

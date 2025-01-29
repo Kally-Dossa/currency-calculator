@@ -29,8 +29,6 @@
   width: 50px;
   height: 50px;
   background-color: white;
-  border: 2px solid #dee2e6;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,10 +36,6 @@
   transition: all 0.3s ease;
 }
 
-.swap-btn:hover {
-  background-color: #f8f9fa;
-  border-color: #ced4da;
-}
 .toggle-option {
   cursor: pointer;
   font-weight: bold;
