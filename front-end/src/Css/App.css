@@ -1,0 +1,11 @@
+.app-container {
+  background-color: rgb(240, 248, 255);
+  color: black;
+  min-height: 100vh; /* Για να καλύπτει όλο το ύψος της σελίδας */
+  padding: 20px; /* Προαιρετικό */
+}
+
+.main-title {
+  font-weight: bold; /* Έντονη γραφή */
+  color: black;
+}

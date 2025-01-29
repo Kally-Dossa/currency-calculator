@@ -1,0 +1,53 @@
+.text-center-sm {
+  text-align: center;
+  font-size: 1.2rem;
+  color: black;
+  margin-bottom: 50px;
+  margin-top: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Ελαφριά σκιά κειμένου */
+}
+.custom-box {
+  background-color: white; /* Λευκό φόντο */
+  padding: 40px; /* Αυξημένο padding */
+  border-radius: 15px; /* Πιο μεγάλες γωνίες */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Σκιά */
+  margin-top: 20px; /* Περιθώριο */
+  width: 80%; /* Πλάτος 80% του container */
+  max-width: 900px; /* Μέγιστο πλάτος */
+  margin-left: auto; /* Κεντράρισμα */
+  margin-right: auto; /* Κεντράρισμα */
+}
+.form-label {
+  font-weight: bold; /* Έντονη γραφή */
+}
+.convert-btn {
+  background-color: #0056b3 !important;
+  color: white !important;
+  border: none !important;
+}
+.swap-btn {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border: 2px solid #dee2e6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.swap-btn:hover {
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+}
+.toggle-option {
+  cursor: pointer;
+  font-weight: bold;
+  color: #a4a1a1;
+}
+
+.toggle-option.active {
+  color: #0056b3;
+}
