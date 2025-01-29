@@ -45,3 +45,26 @@
 .toggle-option.active {
   color: #0056b3;
 }
+@media (max-width: 768px) {
+  .custom-box {
+    display: flex;
+    flex-direction: column; /* Κάνει όλα τα στοιχεία να στοιχίζονται κάθετα */
+    align-items: center;
+  }
+
+  .custom-box .col-md-3,
+  .custom-box .col-md-2,
+  .custom-box .col-md-1 {
+    width: 100%; /* Τα στοιχεία γεμίζουν όλο το πλάτος */
+    margin-bottom: 15px; /* Προσθέτει απόσταση ανάμεσα στα στοιχεία */
+  }
+
+  .swap-btn {
+    margin: 10px auto; /* Κεντράρει το κουμπί swap */
+  }
+
+  .convert-btn {
+    width: 100%; /* Το κουμπί μετατροπής γεμίζει όλο το πλάτος */
+    margin-top: 10px; /* Προσθέτει περιθώριο από τα υπόλοιπα στοιχεία */
+  }
+}

@@ -30,7 +30,7 @@ const App = () => {
           <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
           {/* Διαδρομή για CRUDInterface */}
           <Route
-            path="/business"
+            path="/admin"
             element={isLoggedIn ? <CRUDInterface /> : <Navigate to="/login" />}
           />
           {/* Αν δεν υπάρχει αντιστοιχία, επιστροφή στο "/" */}

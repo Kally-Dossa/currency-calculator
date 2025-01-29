@@ -10,7 +10,7 @@ const CurrencyConverter = () => {
   const [targetCurrency, setTargetCurrency] = useState("");
   const [amount, setAmount] = useState("");
   const [convertedAmount, setConvertedAmount] = useState(null);
-  const [mode, setMode] = useState("Personal"); // Νέα κατάσταση για το mode
+  const [mode, setMode] = useState("User"); // Νέα κατάσταση για το mode
 
   const navigate = useNavigate(); // Για πλοήγηση στις σελίδες
 
@@ -55,7 +55,7 @@ const CurrencyConverter = () => {
   // Λειτουργία για αλλαγή mode και πλοήγηση
   const handleModeChange = (newMode) => {
     setMode(newMode);
-    if (newMode === "Business") {
+    if (newMode === "Admin") {
       navigate("/login"); // Μεταφορά στο Login
     }
   };
@@ -66,17 +66,17 @@ const CurrencyConverter = () => {
         {/* Personal | Business Toggle */}
         <div className="d-flex justify-content-end align-items-center mb-4">
           <span
-            className={`toggle-option ${mode === "Personal" ? "active" : ""}`}
-            onClick={() => handleModeChange("Personal")}
+            className={`toggle-option ${mode === "User" ? "active" : ""}`}
+            onClick={() => handleModeChange("User")}
           >
-            Personal
+            User
           </span>
           <span className="mx-2">|</span>
           <span
-            className={`toggle-option ${mode === "Business" ? "active" : ""}`}
-            onClick={() => handleModeChange("Business")}
+            className={`toggle-option ${mode === "Admin" ? "active" : ""}`}
+            onClick={() => handleModeChange("Admin")}
           >
-            Business
+            Admin
           </span>
         </div>
 
