@@ -73,16 +73,16 @@
 }
 
 .data-display {
-  background-color: #ffffff; /* Light background for the box */
+  background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: monospace; /* Monospace font for data readability */
+  font-family: monospace;
   font-size: 0.9rem;
   color: #333;
   max-height: 300px;
-  overflow-y: auto; /* Scrollable content */
+  overflow-y: auto;
   margin-top: 1rem;
 }
 

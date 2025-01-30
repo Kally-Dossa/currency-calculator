@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Προσθήκη του useNavigate
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Css/CurrencyConverter.css";
 import { BsArrowLeftRight } from "react-icons/bs";
@@ -10,9 +10,9 @@ const CurrencyConverter = () => {
   const [targetCurrency, setTargetCurrency] = useState("");
   const [amount, setAmount] = useState("");
   const [convertedAmount, setConvertedAmount] = useState(null);
-  const [mode, setMode] = useState("User"); // Νέα κατάσταση για το mode
+  const [mode, setMode] = useState("User");
 
-  const navigate = useNavigate(); // Για πλοήγηση στις σελίδες
+  const navigate = useNavigate();
 
   // Fetch available currencies from the backend
   useEffect(() => {
@@ -52,18 +52,17 @@ const CurrencyConverter = () => {
     setTargetCurrency(temp);
   };
 
-  // Λειτουργία για αλλαγή mode και πλοήγηση
   const handleModeChange = (newMode) => {
     setMode(newMode);
     if (newMode === "Admin") {
-      navigate("/login"); // Μεταφορά στο Login
+      navigate("/login");
     }
   };
 
   return (
     <div className="calculator">
       <div className="container mt-4 custom-class">
-        {/* Personal | Business Toggle */}
+        {/* User | Admin Toggle */}
         <div className="d-flex justify-content-end align-items-center mb-4">
           <span
             className={`toggle-option ${mode === "User" ? "active" : ""}`}

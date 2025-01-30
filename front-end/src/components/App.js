@@ -24,16 +24,15 @@ const App = () => {
     <Router>
       <div className="app-container">
         <Routes>
-          {/* Αρχική διαδρομή: CurrencyConverter */}
+          {/* First Path: CurrencyConverter */}
           <Route path="/" element={<CurrencyConverter />} />
-          {/* Διαδρομή για Login */}
+          {/* Path for Login */}
           <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
-          {/* Διαδρομή για CRUDInterface */}
+          {/* Path for CRUDInterface */}
           <Route
             path="/admin"
             element={isLoggedIn ? <CRUDInterface /> : <Navigate to="/login" />}
           />
-          {/* Αν δεν υπάρχει αντιστοιχία, επιστροφή στο "/" */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

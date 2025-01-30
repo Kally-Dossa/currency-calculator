@@ -1,4 +1,3 @@
-/* General container styling */
 .login-container {
   display: flex;
   justify-content: center;
@@ -6,7 +5,6 @@
   height: 100vh;
 }
 
-/* Login Form Styling */
 .login-form {
   background: white;
   padding: 30px;
@@ -19,13 +17,11 @@
 .login-form:hover {
 }
 
-/* Heading */
 .login-form h2 {
   margin-bottom: 20px;
   font-size: 24px;
 }
 
-/* Form Group */
 .form-group {
   margin-bottom: 15px;
   text-align: left;
@@ -52,7 +48,6 @@
   box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
 }
 
-/* Submit Button */
 .submit-btn {
   width: 100%;
   padding: 12px;
@@ -64,7 +59,6 @@
   cursor: pointer;
 }
 
-/* Error Message */
 .error-message {
   color: #ca383f;
   background-color: #f8c5c5;

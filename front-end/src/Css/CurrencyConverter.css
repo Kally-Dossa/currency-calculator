@@ -4,21 +4,21 @@
   color: black;
   margin-bottom: 50px;
   margin-top: 10px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Ελαφριά σκιά κειμένου */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 .custom-box {
-  background-color: white; /* Λευκό φόντο */
-  padding: 40px; /* Αυξημένο padding */
-  border-radius: 15px; /* Πιο μεγάλες γωνίες */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Σκιά */
-  margin-top: 20px; /* Περιθώριο */
-  width: 80%; /* Πλάτος 80% του container */
-  max-width: 900px; /* Μέγιστο πλάτος */
-  margin-left: auto; /* Κεντράρισμα */
-  margin-right: auto; /* Κεντράρισμα */
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 80%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .form-label {
-  font-weight: bold; /* Έντονη γραφή */
+  font-weight: bold;
 }
 .convert-btn {
   background-color: #0056b3 !important;
@@ -48,23 +48,47 @@
 @media (max-width: 768px) {
   .custom-box {
     display: flex;
-    flex-direction: column; /* Κάνει όλα τα στοιχεία να στοιχίζονται κάθετα */
+    flex-direction: column;
     align-items: center;
   }
 
   .custom-box .col-md-3,
   .custom-box .col-md-2,
   .custom-box .col-md-1 {
-    width: 100%; /* Τα στοιχεία γεμίζουν όλο το πλάτος */
-    margin-bottom: 15px; /* Προσθέτει απόσταση ανάμεσα στα στοιχεία */
+    width: 100%;
+    margin-bottom: 15px;
   }
 
   .swap-btn {
-    margin: 10px auto; /* Κεντράρει το κουμπί swap */
+    margin: 10px auto;
   }
 
   .convert-btn {
-    width: 100%; /* Το κουμπί μετατροπής γεμίζει όλο το πλάτος */
-    margin-top: 10px; /* Προσθέτει περιθώριο από τα υπόλοιπα στοιχεία */
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 992px) {
+  .custom-box {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .col-md-3,
+  .col-md-2,
+  .col-md-1 {
+    width: 100% !important;
+    margin-bottom: 15px !important;
+  }
+
+  .swap-btn {
+    margin: 10px auto !important;
+  }
+
+  .convert-btn {
+    width: 100% !important;
+    margin-top: 15px !important;
+    order: 2 !important;
   }
 }
