@@ -16,7 +16,7 @@ const writeData = (data) =>
 // --- CRUD Operations ---
 
 // GET all currencies and their exchange rates
-router.get("/", authMiddleware, (req, res) => {
+router.get("/", (req, res) => {
   const data = readData();
   res.json(data);
 });
