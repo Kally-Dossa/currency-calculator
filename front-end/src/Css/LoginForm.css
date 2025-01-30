@@ -1,3 +1,4 @@
+/* General container styling */
 .login-container {
   display: flex;
   justify-content: center;
@@ -5,54 +6,70 @@
   height: 100vh;
 }
 
+/* Login Form Styling */
 .login-form {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
-}
-
-.login-form h2 {
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 380px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
+.login-form:hover {
+}
+
+/* Heading */
+.login-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Form Group */
 .form-group {
   margin-bottom: 15px;
+  text-align: left;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #333;
 }
 
 .form-group input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
-button {
+.form-group input:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+}
+
+/* Submit Button */
+.submit-btn {
   width: 100%;
-  padding: 10px;
-  background-color: #0056b3;
+  padding: 12px;
+  background: linear-gradient(to right, #0073e6, #0056b3);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
+/* Error Message */
 .error-message {
   color: #ca383f;
   background-color: #f8c5c5;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 6px;
   text-align: center;
   margin-bottom: 10px;
 }
