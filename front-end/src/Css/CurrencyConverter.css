@@ -28,7 +28,7 @@
 .swap-btn {
   width: 50px;
   height: 50px;
-  background-color: white;
+  background-color: white !important;
   display: flex;
   align-items: center;
   justify-content: center;

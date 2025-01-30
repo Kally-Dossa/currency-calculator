@@ -1,5 +1,5 @@
 .app-container {
-  background-color: rgb(240, 248, 255);
+  background-color: #f0f8ff;
   color: black;
   min-height: 100vh; /* Για να καλύπτει όλο το ύψος της σελίδας */
   padding: 20px; /* Προαιρετικό */

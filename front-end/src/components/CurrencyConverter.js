@@ -75,6 +75,9 @@ const CurrencyConverter = () => {
           <span
             className={`toggle-option ${mode === "Admin" ? "active" : ""}`}
             onClick={() => handleModeChange("Admin")}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Login as admin to manage currency data"
           >
             Admin
           </span>
