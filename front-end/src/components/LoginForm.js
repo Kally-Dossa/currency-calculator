@@ -10,23 +10,20 @@ const LoginForm = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-
     try {
       const response = await fetch("http://localhost:8001/api/v1/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("authToken", data.token); // Store token
-        onLogin(username); // Update login state
-        navigate("/admin"); // Redirect
+        console.log("Generated Token:", data.token);
+        localStorage.setItem("authToken", data.token);
+        onLogin(username);
+        navigate("/admin");
       } else {
         setError("⚠️ Incorrect credentials! Please try again.");
       }
@@ -38,7 +35,7 @@ const LoginForm = ({ onLogin }) => {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
-        <h2>Admin's Login Form</h2>
+        <h2>Admin Login Form</h2>
         {error && <div className="error-message">{error}</div>}
         <div className="form-group">
           <label htmlFor="username">Username:</label>

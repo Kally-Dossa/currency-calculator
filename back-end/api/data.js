@@ -16,11 +16,15 @@ const writeData = (data) =>
 // --- CRUD Operations ---
 
 // GET all currencies and their exchange rates
-router.get("/", (req, res) => {
+router.get("/currencies", (req, res) => {
   const data = readData();
   res.json(data);
 });
-
+// Protected GET request for currencies (requires authentication)
+router.get("/", authMiddleware, (req, res) => {
+  const data = readData();
+  res.json(data);
+});
 // POST add or update a currency and its rates
 router.post("/", authMiddleware, (req, res) => {
   const { baseCurrency, rates } = req.body;
@@ -82,8 +86,6 @@ router.delete("/:baseCurrency/:targetCurrency", authMiddleware, (req, res) => {
     data,
   });
 });
-
-// --- Conversion Endpoint ---
 
 // POST convert currency
 router.post("/convert", (req, res) => {

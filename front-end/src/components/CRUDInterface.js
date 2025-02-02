@@ -22,53 +22,82 @@ export default function CRUDInterface() {
     targetCurrency: "",
   });
 
+  const getAuthToken = () => `Basic ${localStorage.getItem("authToken")}`;
   const fetchCurrencies = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8001/api/v1/data/");
+      const token = getAuthToken();
+      console.log("Token Sent:", token);
+
+      const response = await axios.get("http://localhost:8001/api/v1/data/", {
+        headers: { Authorization: token },
+      });
+      console.log("Response Data:", response.data);
+
       setCurrencies(response.data);
     } catch (error) {
-      console.error("Error fetching data", error);
+      console.error(
+        "Error fetching data:",
+        error.response?.data || error.message
+      );
     } finally {
-      setLoading(false);
+      setLoading(false); // Ensure loading is set to false regardless of success or error
     }
   };
 
-  useEffect(() => {
-    fetchCurrencies();
-  }, []);
-
   const addCurrency = async () => {
+    const { baseCurrency, targetCurrency, rate } = createData; // Extract values from state
+
+    if (!baseCurrency || !targetCurrency || !rate) {
+      alert("Please fill all fields.");
+      return;
+    }
+
     try {
-      const { baseCurrency, targetCurrency, rate } = createData;
-      if (!baseCurrency || !targetCurrency || !rate) {
-        alert("Please fill all fields.");
-        return;
-      }
-      await axios.post("http://localhost:8001/api/v1/data/", {
-        baseCurrency,
-        rates: { [targetCurrency]: parseFloat(rate) },
-      });
-      alert(`Currency ${baseCurrency} added successfully.`);
+      const token = getAuthToken();
+      await axios.post(
+        "http://localhost:8001/api/v1/data/",
+        {
+          baseCurrency: baseCurrency.trim(),
+          rates: { [targetCurrency.trim()]: parseFloat(rate) }, // Ensure proper payload structure
+        },
+        {
+          headers: { Authorization: token },
+        }
+      );
       fetchCurrencies();
+      // clear input fields
+      setCreateData({ baseCurrency: "", targetCurrency: "", rate: "" });
+      alert("Currency added successfully!");
     } catch (error) {
-      console.error("Error adding currency", error);
+      console.error(
+        "Error adding currency:",
+        error.response?.data || error.message
+      );
+      alert("Failed to add currency. Please check your input and try again.");
     }
   };
 
   const updateRate = async () => {
     try {
-      const { baseCurrency, targetCurrency, rate } = updateData;
-      if (!baseCurrency || !targetCurrency || !rate) {
+      const token = getAuthToken();
+      if (
+        !updateData.baseCurrency ||
+        !updateData.targetCurrency ||
+        !updateData.rate
+      ) {
         alert("Please fill all fields.");
         return;
       }
+
       await axios.put(
-        `http://localhost:8001/api/v1/data/${baseCurrency}/${targetCurrency}`,
-        { rate: parseFloat(rate) }
+        `http://localhost:8001/api/v1/data/${updateData.baseCurrency}/${updateData.targetCurrency}`,
+        { rate: parseFloat(updateData.rate) },
+        { headers: { Authorization: token } }
       );
-      alert(`Rate updated for ${baseCurrency} to ${targetCurrency}.`);
       fetchCurrencies();
+      // clear input fields
+      setUpdateData({ baseCurrency: "", targetCurrency: "", rate: "" });
     } catch (error) {
       console.error("Error updating rate", error);
     }
@@ -76,16 +105,19 @@ export default function CRUDInterface() {
 
   const deleteRate = async () => {
     try {
-      const { baseCurrency, targetCurrency } = deleteData;
-      if (!baseCurrency || !targetCurrency) {
+      const token = getAuthToken();
+      if (!deleteData.baseCurrency || !deleteData.targetCurrency) {
         alert("Please fill all fields.");
         return;
       }
+
       await axios.delete(
-        `http://localhost:8001/api/v1/data/${baseCurrency}/${targetCurrency}`
+        `http://localhost:8001/api/v1/data/${deleteData.baseCurrency}/${deleteData.targetCurrency}`,
+        { headers: { Authorization: token } }
       );
-      alert(`Rate deleted for ${baseCurrency} to ${targetCurrency}.`);
       fetchCurrencies();
+      // clear input fields
+      setDeleteData({ baseCurrency: "", targetCurrency: "" });
     } catch (error) {
       console.error("Error deleting rate", error);
     }
@@ -142,13 +174,13 @@ export default function CRUDInterface() {
         </div>
       )}
       {activeAction === "read" && (
-        <div>
-          <button onClick={fetchCurrencies} className="btn btn-primary">
+        <div className="read-action">
+          <button
+            onClick={fetchCurrencies}
+            className="btn btn-primary refresh-btn"
+          >
             Refresh List
           </button>
-          <div className="info-box">
-            !Note. Displaying exchange rates between available currencies.
-          </div>
           {loading ? (
             <p className="loading">Loading...</p>
           ) : (
@@ -162,7 +194,12 @@ export default function CRUDInterface() {
                     {Object.entries(currencies[currency] || {}).map(
                       ([target, rate]) => (
                         <div key={target} className="data-item">
-                          <span>{target}:</span> <span>{rate.toFixed(4)}</span>
+                          <span>{target}:</span>
+                          <span>
+                            {typeof rate === "number" && !isNaN(rate)
+                              ? rate.toFixed(4)
+                              : "Invalid Rate"}
+                          </span>
                         </div>
                       )
                     )}
@@ -175,38 +212,24 @@ export default function CRUDInterface() {
       )}
       {activeAction === "update" && (
         <div className="action-form">
-          <select
+          <input
+            type="text"
+            placeholder="Base Currency"
             value={updateData.baseCurrency}
             onChange={(e) =>
               setUpdateData({ ...updateData, baseCurrency: e.target.value })
             }
             className="input-field"
-          >
-            <option value="">Select Base Currency</option>
-            {Object.keys(currencies).map((currency) => (
-              <option key={currency} value={currency}>
-                {currency}
-              </option>
-            ))}
-          </select>
-          {updateData.baseCurrency && (
-            <select
-              value={updateData.targetCurrency}
-              onChange={(e) =>
-                setUpdateData({ ...updateData, targetCurrency: e.target.value })
-              }
-              className="input-field"
-            >
-              <option value="">Select Target Currency</option>
-              {Object.keys(currencies[updateData.baseCurrency] || {}).map(
-                (currency) => (
-                  <option key={currency} value={currency}>
-                    {currency}
-                  </option>
-                )
-              )}
-            </select>
-          )}
+          />
+          <input
+            type="text"
+            placeholder="Target Currency"
+            value={updateData.targetCurrency}
+            onChange={(e) =>
+              setUpdateData({ ...updateData, targetCurrency: e.target.value })
+            }
+            className="input-field"
+          />
           <input
             type="number"
             placeholder="New Rate"
@@ -221,40 +244,27 @@ export default function CRUDInterface() {
           </button>
         </div>
       )}
+
       {activeAction === "delete" && (
         <div className="action-form">
-          <select
+          <input
+            type="text"
+            placeholder="Base Currency"
             value={deleteData.baseCurrency}
             onChange={(e) =>
               setDeleteData({ ...deleteData, baseCurrency: e.target.value })
             }
             className="input-field"
-          >
-            <option value="">Select Base Currency</option>
-            {Object.keys(currencies).map((currency) => (
-              <option key={currency} value={currency}>
-                {currency}
-              </option>
-            ))}
-          </select>
-          {deleteData.baseCurrency && (
-            <select
-              value={deleteData.targetCurrency}
-              onChange={(e) =>
-                setDeleteData({ ...deleteData, targetCurrency: e.target.value })
-              }
-              className="input-field"
-            >
-              <option value="">Select Target Currency</option>
-              {Object.keys(currencies[deleteData.baseCurrency] || {}).map(
-                (currency) => (
-                  <option key={currency} value={currency}>
-                    {currency}
-                  </option>
-                )
-              )}
-            </select>
-          )}
+          />
+          <input
+            type="text"
+            placeholder="Target Currency"
+            value={deleteData.targetCurrency}
+            onChange={(e) =>
+              setDeleteData({ ...deleteData, targetCurrency: e.target.value })
+            }
+            className="input-field"
+          />
           <button onClick={deleteRate} className="btn btn-primary">
             Delete Rate
           </button>

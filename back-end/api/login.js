@@ -18,8 +18,8 @@ const loadUsers = () => {
 };
 
 // Function to generate a Base64 token
-const generateBase64Token = (username) => {
-  const tokenData = `${username}:${crypto.randomBytes(16).toString("hex")}`;
+const generateBase64Token = (username, password) => {
+  const tokenData = `${username}:${password}`;
   return Buffer.from(tokenData).toString("base64");
 };
 
@@ -39,13 +39,16 @@ router.post("/", (req, res) => {
       (user) => user.username === username && user.password === password
     );
 
+    //if user exists create token
+    //else 403 forbidden -> invalid username or password
     if (user) {
-      const token = generateBase64Token(username);
+      const token = generateBase64Token(username, password);
       console.log(`Generated Token for ${username}: ${token}`);
       res.status(200).json({
         message: "Login successful",
         username: user.username,
-        token, // Send the token to the UI
+        // Send the token to the UI
+        token,
       });
     } else {
       res.status(403).json({ message: "Invalid username or password" });
