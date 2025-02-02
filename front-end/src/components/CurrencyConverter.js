@@ -18,16 +18,25 @@ const CurrencyConverter = () => {
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
-        const response = await axios.get("http://localhost:8001/api/v1/data/");
+        const response = await axios.get(
+          "http://localhost:8001/api/v1/data/currencies"
+        );
         setCurrencies(Object.keys(response.data));
-        setBaseCurrency(Object.keys(response.data)[0]); // Default base currency
-        setTargetCurrency(Object.keys(response.data)[1]); // Default target currency
+        // Default base currency
+        setBaseCurrency(Object.keys(response.data)[0]);
+        // Default target currency
+        setTargetCurrency(Object.keys(response.data)[1]);
       } catch (error) {
         console.error("Error fetching currencies:", error);
       }
     };
     fetchCurrencies();
   }, []);
+  useEffect(() => {
+    if (amount && baseCurrency && targetCurrency) {
+      handleConvert();
+    }
+  }, [amount, baseCurrency, targetCurrency]);
 
   const handleConvert = async () => {
     try {
