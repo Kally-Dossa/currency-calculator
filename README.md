@@ -4,6 +4,12 @@ This project is a currency converter application consisting of two main componen
 The API provides endpoints for converting currencies, as well as CRUD (Create, Read, Update, Delete) operations to manage currencies and their exchange rates. The API also includes basic authentication and authorization to protect certain endpoints.
 The UI allows users to easily convert currencies, add new currencies, or update existing ones, using a simple form. Users must log in to access the protected CRUD operations for currencies.
 
+## Features
+- Convert amounts between currencies  
+- Add, update, and delete currencies and rates  
+- Basic login and authentication  
+- Separate frontend and backend
+  
 ## Get Started
 **How to download**
 ```bash
@@ -29,3 +35,24 @@ cd front-end
 npm install
 npm start
 ```
+
+## API Overview
+**Authentication**
+
+- POST /api/login → Login with username & password
+
+**Currencies**
+
+- GET /api/currencies → List all currencies and exchange rates
+
+- POST /api/currencies → Add a new currency (requires login)
+
+- PUT /api/currencies/:id → Update an existing currency (requires login)
+
+- DELETE /api/currencies/:id → Delete a currency (requires login)
+
+**Conversion**
+
+- POST /api/convert → Convert an amount from one currency to another
+
+  
