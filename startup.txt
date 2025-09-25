@@ -1,6 +1,0 @@
-back-end starts with the node index.js command
-back-end runs on 8001 PORT
-
-front-end starts with the npm start command
-front-end runs on 3001 PORT
-
