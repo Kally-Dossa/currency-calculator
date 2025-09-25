@@ -39,7 +39,7 @@ npm start
 ## API Overview
 **Authentication**
 
-- POST /api/login → Login with username & password
+- POST `/api/login` → Login with username & password
 
 **Currencies**
 
