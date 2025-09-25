@@ -36,6 +36,14 @@ npm install
 npm start
 ```
 
+**Default Login**
+
+Use the following credentials to log in:
+```
+  "username": "KallyDossa"
+  "password": "12345678"
+```
+
 ## API Overview
 **Authentication**
 
