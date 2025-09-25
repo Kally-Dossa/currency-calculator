@@ -43,16 +43,16 @@ npm start
 
 **Currencies**
 
-- GET /api/currencies → List all currencies and exchange rates
+- GET `/api/currencies` → List all currencies and exchange rates
 
-- POST /api/currencies → Add a new currency (requires login)
+- POST `/api/currencies` → Add a new currency (requires login)
 
-- PUT /api/currencies/:id → Update an existing currency (requires login)
+- PUT `/api/currencies/:id` → Update an existing currency (requires login)
 
-- DELETE /api/currencies/:id → Delete a currency (requires login)
+- DELETE `/api/currencies/:id` → Delete a currency (requires login)
 
 **Conversion**
 
-- POST /api/convert → Convert an amount from one currency to another
+- POST `/api/convert` → Convert an amount from one currency to another
 
   
